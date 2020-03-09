@@ -38,7 +38,7 @@ public class enemySpawn : MonoBehaviour
             originPoint.y += spawnRadius + 5;
             Instantiate(slime, originPoint, transform.rotation);
         }
-        else if (stats.MonstersKilled <= 25)
+        else if (stats.MonstersKilled <= 15)
         {
             //stopSpawn = true;
             mobChoice = Random.Range(1, 3);
@@ -54,7 +54,7 @@ public class enemySpawn : MonoBehaviour
                 Instantiate(turtle, originPoint, transform.rotation);
             }
         }
-        else if (stats.MonstersKilled <= 35)
+        else if (stats.MonstersKilled <= 25)
         {
             mobChoice = Random.Range(1, 4);
             originPoint = Player.gameObject.transform.position;
