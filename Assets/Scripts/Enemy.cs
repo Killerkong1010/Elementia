@@ -75,6 +75,18 @@ public class Enemy : MonoBehaviour
     //        Die();
     //    }
     //}
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("Fireball"))
+        {
+            health -= 50;
+            healthBar.fillAmount = health / startHealth;
+            if (health <= 0 && !isDead)
+            {
+                Die();
+            }
+        }
+    }
 
 
     public void Damage(int damageAmount)
