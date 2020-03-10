@@ -12,6 +12,7 @@ TagManager:
   - Turtle
   - Golem
   - StaffCam
+  - ScoreNum
   layers:
   - Default
   - TransparentFX

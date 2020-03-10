@@ -53,7 +53,10 @@ public class Enemy : MonoBehaviour
         stats.MonstersKilled++;
         var objGold = GameObject.FindGameObjectsWithTag("txtGold").FirstOrDefault();
         var txtGold = objGold.GetComponent<TextMeshProUGUI>();
+        var objScore = GameObject.FindGameObjectsWithTag("ScoreNum").FirstOrDefault();
+        var txtScore = objScore.GetComponent<TextMeshProUGUI>();
         txtGold.SetText(stats.TotalMoney.ToString());
+        txtScore.SetText(stats.MonstersKilled.ToString());
     }
 
     //void OnTriggerEnter(Collider col)
