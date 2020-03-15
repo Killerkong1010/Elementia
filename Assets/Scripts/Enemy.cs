@@ -59,22 +59,6 @@ public class Enemy : MonoBehaviour
         txtScore.SetText(stats.MonstersKilled.ToString());
     }
 
-    //void OnTriggerEnter(Collider col)
-    //{
-    //    if (col.gameObject.CompareTag("Projectile"))
-    //    {
-    //        Destroy(col);
-    //        health -= 15;
-    //        healthBar.fillAmount = health / startHealth;
-
-    //    }
-
-
-    //    if (health <= 0 && !isDead)
-    //    {
-    //        Die();
-    //    }
-    //}
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Fireball"))
