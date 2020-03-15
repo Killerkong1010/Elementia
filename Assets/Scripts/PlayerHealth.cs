@@ -19,4 +19,19 @@ public class PlayerHealth : MonoBehaviour
             SceneManager.LoadScene(2);
         }
     }
+
+    public void onHeal(int heal)
+    {
+        if (health < 100)
+        {
+            var difference = 100 - health;
+            if (heal > difference)
+                health = 100;
+            else
+                health = health + heal;
+
+            healthBar.fillAmount = health / startHealth;
+        }
+
+    }
 }

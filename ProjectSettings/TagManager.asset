@@ -15,6 +15,7 @@ TagManager:
   - ScoreNum
   - Fireball
   - fbIconCD
+  - healIconCD
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,7 @@ public class CollisionController : MonoBehaviour
             healthbar.onTakeDamage(10);
 
             
-        }
+        }         
         if (collision.gameObject.tag == "Turtle")
         {
             healthbar.onTakeDamage(30);

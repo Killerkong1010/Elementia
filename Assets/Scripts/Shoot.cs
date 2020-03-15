@@ -16,7 +16,11 @@ public class Shoot : MonoBehaviour
     public float death_rate_fireball = 5;
     public Rigidbody Fireball;
     public float cooldownTime_fb = 5;
+    public float cooldownTime_heal = 20;
     private float nextFireTime;
+    private float nextHealTime;
+
+    public PlayerHealth healthbar;
     void Start()
     {
         prefab = Resources.Load("Fireball") as GameObject;
@@ -43,13 +47,26 @@ public class Shoot : MonoBehaviour
 
             }
         }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (Time.time > nextHealTime)
+            {
+                healthbar.onHeal(30);
+                nextHealTime = Time.time + cooldownTime_heal;
+            }
+        }
     }
     void cooldownDisplay()
     {
-        var timeLeft = nextFireTime - Time.time;
-        timeLeft = timeLeft < 0 ? 0 : timeLeft; //tertiary operator, way of doing a 1 line if statement. If timeLeft < 0 return 0 otherwise return timeLeft.
-        var cooldownUI = GameObject.FindGameObjectsWithTag("fbIconCD").FirstOrDefault();
-        var cooldownTXT = cooldownUI.GetComponent<TextMeshProUGUI>();
-        cooldownTXT.SetText(timeLeft.ToString("0.00"));
+        var timeLeft_fb = nextFireTime - Time.time;
+        var timeLeft_heal = nextHealTime - Time.time;
+        timeLeft_heal = timeLeft_heal < 0 ? 0 : timeLeft_heal;
+        timeLeft_fb = timeLeft_fb < 0 ? 0 : timeLeft_fb; //tertiary operator, way of doing a 1 line if statement. If timeLeft < 0 return 0 otherwise return timeLeft.
+        var cooldownUI_fb = GameObject.FindGameObjectsWithTag("fbIconCD").FirstOrDefault();
+        var cooldownUI_heal = GameObject.FindGameObjectsWithTag("healIconCD").FirstOrDefault();
+        var cooldownTXT_fb = cooldownUI_fb.GetComponent<TextMeshProUGUI>();
+        var cooldownTXT_heal = cooldownUI_heal.GetComponent<TextMeshProUGUI>();
+        cooldownTXT_fb.SetText(timeLeft_fb.ToString("0.00"));
+        cooldownTXT_heal.SetText(timeLeft_heal.ToString("0.00"));
     }
 }
