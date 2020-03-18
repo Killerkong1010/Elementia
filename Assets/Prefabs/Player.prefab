@@ -360,8 +360,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3099977429811047248}
   - component: {fileID: 3099977429811047251}
-  - component: {fileID: 3099977429811047249}
-  - component: {fileID: 4159840349311354794}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -403,36 +401,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3099977429811047249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3099977429811047250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1ddbf341f70284f910d717e3d24703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4
-  jump_Force: 8
---- !u!114 &4159840349311354794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3099977429811047250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c7013aeda152374cb26bd5c5e41f788, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 40
-  damage: 15
-  death_rate: 2
-  projectile: {fileID: 0}
 --- !u!1 &3099977429894475942
 GameObject:
   m_ObjectHideFlags: 0

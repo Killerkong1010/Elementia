@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
     private CharacterController character_Controller;
     private Vector3 move_Direction;
 
@@ -12,6 +12,12 @@ public class PlayerMovement : MonoBehaviour
     private float gravity = 20f;
     public float jump_Force = 10f;
     private float vertical_Velocity;
+    //Sprintbar
+    public Image energyBar;
+    public float energy;
+    public float startEnergy;
+    public float energyDrain;
+    public float energyRegeneration;
 
     void Awake()
     {
@@ -22,8 +28,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MovePlayer();
+        energyRegen();
     }
-    void MovePlayer()
+     void MovePlayer()
     {
         move_Direction = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")); //Vector3 takes 3 arguements
         move_Direction = transform.TransformDirection(move_Direction);
@@ -31,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
         ApplyGravity();
         Sprint();
+
         character_Controller.Move(move_Direction); //Utilises Unity's move function.
     }
     void ApplyGravity()
@@ -52,14 +60,30 @@ public class PlayerMovement : MonoBehaviour
     }
     void Sprint()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && energy >= energyDrain)
         {
-            speed = 7.5f;
+            if (energy >= energyDrain)
+            {
+                speed = 7.5f;
+                energy = energy - energyDrain;
+                energyBar.fillAmount = energy / startEnergy;
+            }
+            else
+            {
+                speed = 5f;
+            }
+            
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             speed = 5f;
         }
+
+    }
+    void energyRegen()
+    {
+        energy += energyRegeneration;
+        energyBar.fillAmount = energy / startEnergy;
     }
 
    

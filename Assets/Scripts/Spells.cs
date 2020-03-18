@@ -5,22 +5,28 @@ using System.Linq;
 using TMPro;
 using UnityEngine.UI;
 
-public class Shoot : MonoBehaviour
+public class Spells : MonoBehaviour
 {
     // Start is called before the first frame update
     GameObject prefab;
     public Transform shootPoint;
+    public Rigidbody Fireball;
 
     public float speed = 10;
+    public float blinkSpeed;
     public float damage = 50;
     public float death_rate_fireball = 5;
-    public Rigidbody Fireball;
     public float cooldownTime_fb = 5;
     public float cooldownTime_heal = 20;
+    public float cooldownTime_Blink = 1;
+
     private float nextFireTime;
     private float nextHealTime;
+    private float nextBlinkTime;
+
 
     public PlayerHealth healthbar;
+    public PlayerHealth energybar;
     void Start()
     {
         prefab = Resources.Load("Fireball") as GameObject;
@@ -55,6 +61,13 @@ public class Shoot : MonoBehaviour
                 nextHealTime = Time.time + cooldownTime_heal;
             }
         }
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //{
+        //    if (Time.time > nextBlinkTime)
+        //    {
+
+        //    }
+        //}
     }
     void cooldownDisplay()
     {
