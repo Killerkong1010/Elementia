@@ -16,6 +16,8 @@ TagManager:
   - Fireball
   - fbIconCD
   - healIconCD
+  - FxTemporaire
+  - deathEffect
   layers:
   - Default
   - TransparentFX

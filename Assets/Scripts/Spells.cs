@@ -9,6 +9,8 @@ public class Spells : MonoBehaviour
 {
     // Start is called before the first frame update
     GameObject prefab;
+    GameObject healVFX;
+    public Transform healPoint;
     public Transform shootPoint;
     public Rigidbody Fireball;
 
@@ -30,6 +32,7 @@ public class Spells : MonoBehaviour
     void Start()
     {
         prefab = Resources.Load("Fireball") as GameObject;
+        healVFX = Resources.Load("healEffect") as GameObject;
 
     }
 
@@ -59,6 +62,8 @@ public class Spells : MonoBehaviour
             {
                 healthbar.onHeal(30);
                 nextHealTime = Time.time + cooldownTime_heal;
+                GameObject healEffect = Instantiate(healVFX) as GameObject;
+                healEffect.transform.position = healPoint.transform.position;
             }
         }
         //if (Input.GetKeyDown(KeyCode.Alpha3))

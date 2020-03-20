@@ -10,6 +10,11 @@ public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
     public Transform Player;
+    public Transform deathPoint;
+    GameObject deathVFX;
+    GameObject rockVFX;
+    GameObject turtleHitVFX;
+    GameObject slimeHitVFX;
     public Text txt;
     public float MoveSpeed = 4;
     public float MaxDist = 10;
@@ -24,6 +29,10 @@ public class Enemy : MonoBehaviour
     {
         health = startHealth;
         Player = GameObject.FindGameObjectWithTag("PlayerMain").transform;
+        deathVFX = Resources.Load("deathEffect") as GameObject;
+        rockVFX = Resources.Load("rockHit") as GameObject;
+        turtleHitVFX = Resources.Load("turtleHit") as GameObject;
+        slimeHitVFX = Resources.Load("miscHit") as GameObject;
     }
 
     // Update is called once per frame
@@ -47,7 +56,14 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
         Destroy(gameObject);
-        
+
+        GameObject deathEffect = Instantiate(deathVFX) as GameObject;
+        deathEffect.transform.position = deathPoint.transform.position;
+        var ps = deathEffect.GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule ma = ps.main;
+        ma.startColor = new Color(255, 10, 10);
+
+
         var stats = GameObject.FindObjectOfType<PlayerStats>(); // Getting the playerMoney script from the player gameobject
         stats.TotalMoney += goldDrop; //adds the value of goldDrop to the total gold of the player
         stats.MonstersKilled++;
@@ -65,6 +81,8 @@ public class Enemy : MonoBehaviour
         {
             health -= 50;
             healthBar.fillAmount = health / startHealth;
+            hitEffects();
+
             if (health <= 0 && !isDead)
             {
                 Die();
@@ -77,10 +95,30 @@ public class Enemy : MonoBehaviour
     {
         health -= damageAmount;
         healthBar.fillAmount = health / startHealth;
-
+        hitEffects();
         if (health <= 0 && !isDead)
         {
             Die();
+            
+        }
+    }
+
+    public void hitEffects()
+    {
+        if (startHealth == 500)
+        {
+            GameObject rockHit = Instantiate(rockVFX) as GameObject;
+            rockHit.transform.position = deathPoint.transform.position;
+        }
+        else if (startHealth == 200)
+        {
+            GameObject turtleHit = Instantiate(turtleHitVFX) as GameObject;
+            turtleHit.transform.position = deathPoint.transform.position;
+        }
+        else if (startHealth == 100)
+        {
+            GameObject slimeHit = Instantiate(slimeHitVFX) as GameObject;
+            slimeHit.transform.position = deathPoint.transform.position;
         }
     }
 }
