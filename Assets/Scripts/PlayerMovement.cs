@@ -82,8 +82,16 @@ public class PlayerMovement : MonoBehaviour
     }
     void energyRegen()
     {
-        energy += energyRegeneration;
-        energyBar.fillAmount = energy / startEnergy;
+        var difference = 100 - energy;
+        if (energyRegeneration > difference)
+        {
+            energy = 100;
+        }
+        else
+        {
+            energy += energyRegeneration;
+            energyBar.fillAmount = energy / startEnergy;
+        }
     }
 
    
