@@ -18,6 +18,8 @@ TagManager:
   - healIconCD
   - FxTemporaire
   - deathEffect
+  - frostIconCD
+  - FrostWave
   layers:
   - Default
   - TransparentFX

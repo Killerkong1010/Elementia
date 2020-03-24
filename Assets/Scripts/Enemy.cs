@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -15,15 +16,24 @@ public class Enemy : MonoBehaviour
     GameObject rockVFX;
     GameObject turtleHitVFX;
     GameObject slimeHitVFX;
+    public GameObject golem;
+    public GameObject turtle;
+    public GameObject slime;
     public Text txt;
+
+    public float slowDuration = 5;
     public float MoveSpeed = 4;
     public float MaxDist = 10;
     public float MinDist = 5;
+
     public Image healthBar;
     public float startHealth = 100;
     private float health;
     public float damage = 20;
     private bool isDead = false;
+    private bool slowed;
+    private bool isBlue;
+    private DateTime slowedAt;
     public int goldDrop;
     void Start()
     {
@@ -45,9 +55,11 @@ public class Enemy : MonoBehaviour
 
             if (Vector3.Distance(transform.position, Player.position) <= MaxDist)
             {
-
+                //range attack here
             }
         }
+        CheckEffects();
+        SlowColorChange();
     }
 
 
@@ -88,6 +100,20 @@ public class Enemy : MonoBehaviour
                 Die();
             }
         }
+        if (col.gameObject.CompareTag("FrostWave"))
+        {
+            health -= 20;
+            healthBar.fillAmount = health / startHealth;
+            hitEffects();
+            slowed = true;
+            isBlue = true;
+            slowedAt = DateTime.Now;
+            MoveSpeed = MoveSpeed / 2;
+            if (health <= 0 && !isDead)
+            {
+                Die();
+            }
+        }
     }
 
 
@@ -99,7 +125,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0 && !isDead)
         {
             Die();
-            
+
         }
     }
 
@@ -120,5 +146,36 @@ public class Enemy : MonoBehaviour
             GameObject slimeHit = Instantiate(slimeHitVFX) as GameObject;
             slimeHit.transform.position = deathPoint.transform.position;
         }
+    }
+
+    private void CheckEffects()
+    {
+        if(slowed && DateTime.Now.Subtract(slowedAt).TotalSeconds > slowDuration)
+        {
+            MoveSpeed = MoveSpeed * 2;
+            slowed = false;
+        }
+    }
+    private void SlowColorChange()
+    {
+        if (isBlue)
+        {
+            if (startHealth == 500)
+            {
+                var golemRenderer = golem.GetComponent<Renderer>();
+                golemRenderer.material.SetColor("Albedo", Color.blue);
+            }
+            if (startHealth == 200)
+            {
+                var turtleRenderer = turtle.GetComponent<Renderer>();
+                turtleRenderer.material.SetColor("Albedo", Color.blue);
+            }
+            if (startHealth == 100)
+            {
+                var slimeRenderer = slime.GetComponent<Renderer>();
+                slimeRenderer.material.SetColor("Albedo", Color.blue);
+            }
+        }
+        
     }
 }
