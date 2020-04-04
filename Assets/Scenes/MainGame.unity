@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c72900386e4e994a9e57fc01f0c404b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyBar: {fileID: 73328428}
+  energyBar: {fileID: 288757620}
   energy: 100
   startEnergy: 100
   energyRegeneration: 10
@@ -913,11 +913,12 @@ MonoBehaviour:
   Player: {fileID: 242837693}
   stopSpawn: 0
   spawnTime: 1
-  spawnDelay: 5
+  spawnDelay: 0.5
   MaxDist: 10
   MinDist: 5
   MoveSpeed: 4
   spawnRadius: 30
+  SpawnCount: 0
 --- !u!4 &355939108
 Transform:
   m_ObjectHideFlags: 0
