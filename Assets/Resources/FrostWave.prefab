@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8358992001415149297}
   - component: {fileID: 9157963891868539446}
   - component: {fileID: 8973209703682266673}
-  - component: {fileID: 135556236395624954}
+  - component: {fileID: 135922003644108626}
   m_Layer: 0
   m_Name: FrostWave
   m_TagString: FrostWave
@@ -108,8 +108,8 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
---- !u!135 &135556236395624954
+  m_CollisionDetection: 2
+--- !u!135 &135922003644108626
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

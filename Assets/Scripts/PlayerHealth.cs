@@ -10,11 +10,6 @@ public class PlayerHealth : MonoBehaviour
     public float health;
     public float startHealth;
 
-    public Image energyBar;
-    public float energy;
-    public float startEnergy;
-    public float energyDrain;
-
     public void onTakeDamage(int damage)
     {
         health = health - damage;

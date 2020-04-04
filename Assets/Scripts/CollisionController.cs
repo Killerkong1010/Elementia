@@ -8,20 +8,18 @@ public class CollisionController : MonoBehaviour
     public PlayerHealth healthbar;
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Slime")
+        switch (collision.gameObject.tag)
         {
-            healthbar.onTakeDamage(10);
-
-            
-        }         
-        if (collision.gameObject.tag == "Turtle")
-        {
-            healthbar.onTakeDamage(30);
+            case "Slime":
+                healthbar.onTakeDamage(10);
+                break;
+            case "Turtle":
+                healthbar.onTakeDamage(30);
+                break;
+            case "Golem":
+                healthbar.onTakeDamage(50);
+                break;
         }
-
-        if (collision.gameObject.tag == "Golem")
-        {
-            healthbar.onTakeDamage(50);
-        }
+        
     }
 }

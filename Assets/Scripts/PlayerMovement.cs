@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,12 +14,30 @@ public class PlayerMovement : MonoBehaviour
     private float gravity = 20f;
     public float jump_Force = 10f;
     private float vertical_Velocity;
+    public bool sprinting;
     //Sprintbar
-    public Image energyBar;
-    public float energy;
-    public float startEnergy;
-    public float energyDrain;
-    public float energyRegeneration;
+    private Timer oneSecondTimer;
+    public PlayerEnergy energybar;
+
+    void Start()
+    {
+        //create a time and fire it ever 1000ms (1 second)
+        oneSecondTimer = new Timer(1000);
+        oneSecondTimer.Start();
+        //call the OneSecondTimer_Elapsed every time the timer fires
+        oneSecondTimer.Elapsed += OneSecondTimer_Elapsed;
+    }
+
+    private void OneSecondTimer_Elapsed(object sender, ElapsedEventArgs e)
+    {
+        //this will fire every second
+        energybar.EnergyRegen();
+        if (sprinting)
+            energybar.DrainEnergy();
+
+        //make sure the energy bar is updated
+        energybar.Update();
+    }
 
     void Awake()
     {
@@ -28,15 +48,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         MovePlayer();
-        energyRegen();
     }
-     void MovePlayer()
+    void MovePlayer()
     {
         move_Direction = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")); //Vector3 takes 3 arguements
         move_Direction = transform.TransformDirection(move_Direction);
         move_Direction *= speed * Time.deltaTime;
 
         ApplyGravity();
+
         Sprint();
 
         character_Controller.Move(move_Direction); //Utilises Unity's move function.
@@ -60,39 +80,16 @@ public class PlayerMovement : MonoBehaviour
     }
     void Sprint()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && energy >= energyDrain)
+        if (Input.GetKey(KeyCode.LeftShift) && energybar.HasEnergy)
         {
-            if (energy >= energyDrain)
-            {
-                speed = 7.5f;
-                energy = energy - energyDrain;
-                energyBar.fillAmount = energy / startEnergy;
-            }
-            else
-            {
-                speed = 5f;
-            }
-            
+            speed = 7.5f;
+            sprinting = true;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        else
         {
+            sprinting = false;
             speed = 5f;
         }
 
     }
-    void energyRegen()
-    {
-        var difference = 100 - energy;
-        if (energyRegeneration > difference)
-        {
-            energy = 100;
-        }
-        else
-        {
-            energy += energyRegeneration;
-            energyBar.fillAmount = energy / startEnergy;
-        }
-    }
-
-   
 }

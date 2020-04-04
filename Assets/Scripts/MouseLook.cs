@@ -13,7 +13,7 @@ public class MouseLook : MonoBehaviour
     [SerializeField]
     private bool can_Unlock = true; //unlocks cursor to allow button pressing
     [SerializeField]
-    private float sensitivity = 5f;
+    public float sensitivity = 5f;
     [SerializeField]
     private int smooth_Steps = 10;
     [SerializeField]

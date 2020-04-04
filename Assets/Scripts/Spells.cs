@@ -36,7 +36,7 @@ public class Spells : MonoBehaviour
 
 
     public PlayerHealth healthbar;
-    public PlayerHealth energybar;
+    public PlayerEnergy energybar;
     void Start()
     {
         prefab = Resources.Load("Fireball") as GameObject;
@@ -70,6 +70,7 @@ public class Spells : MonoBehaviour
             if (Time.time > nextHealTime)
             {
                 healthbar.onHeal(30);
+                energybar.OnEnergyHeal(50);
                 nextHealTime = Time.time + cooldownTime_heal;
                 GameObject healEffect = Instantiate(healVFX) as GameObject;
                 healEffect.transform.position = healPoint.transform.position;
