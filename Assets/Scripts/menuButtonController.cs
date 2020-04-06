@@ -11,6 +11,7 @@ public class menuButtonController : MonoBehaviour
     public Button settings;
     public Button quitGameBtn;
     public Button controlsBtn;
+    public Button creditsBtn;
     void Start()
     {
         Button btn = startGameBtn.GetComponent<Button>();
@@ -21,6 +22,8 @@ public class menuButtonController : MonoBehaviour
         btn2.onClick.AddListener(Settings);
         Button btn3 = controlsBtn.GetComponent<Button>();
         btn3.onClick.AddListener(Controls);
+        Button btn4 = creditsBtn.GetComponent<Button>();
+        btn4.onClick.AddListener(Credits);
     }
 
     // Update is called once per frame
@@ -40,6 +43,10 @@ public class menuButtonController : MonoBehaviour
     void Controls()
     {
         SceneManager.LoadScene(4);
+    }
+    void Credits()
+    {
+        SceneManager.LoadScene(5);
     }
     void Update()
     {
