@@ -4,20 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public int TotalMoney { get; set; }
-    public int MonstersKilled { get; set; }
-    public int Score { get; set; }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
+    public int TotalMoney { get; set; } //Integer holding the player's money.
+    public int MonstersKilled { get; set; } // Integer holding the number of monsters killed
+    public int Score { get; set; }// Integer holding the score that the player has.
 }
